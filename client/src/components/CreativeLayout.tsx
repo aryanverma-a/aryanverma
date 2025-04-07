@@ -37,7 +37,7 @@ export default function CreativeLayout({ children, showNameCorners = true }: Cre
       {/* First name in top left corner - only if showNameCorners is true */}
       {showNameCorners && (
         <motion.div 
-          className="fixed top-0 left-0 text-[15vw] font-bold leading-none z-30"
+          className="fixed top-0 left-0 text-[15vw] font-bold leading-none z-30 font-serif"
           initial={{ opacity: 0 }}
           animate={{ opacity: isReady ? 1 : 0 }}
           transition={{ delay: 0.2, duration: 0.5 }}
@@ -50,7 +50,7 @@ export default function CreativeLayout({ children, showNameCorners = true }: Cre
       {/* Last name in bottom right corner - only if showNameCorners is true */}
       {showNameCorners && (
         <motion.div 
-          className="fixed bottom-0 right-0 text-[15vw] font-bold leading-none z-30"
+          className="fixed bottom-0 right-0 text-[15vw] font-bold leading-none z-30 font-serif"
           initial={{ opacity: 0 }}
           animate={{ opacity: isReady ? 1 : 0 }}
           transition={{ delay: 0.2, duration: 0.5 }}
