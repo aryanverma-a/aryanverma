@@ -6,10 +6,8 @@ export default function DotPattern() {
   const { scrollY } = useScroll();
   const [dots, setDots] = useState<JSX.Element[]>([]);
   
-  // Transform the dots scale based on scroll position
-  // Increase zoom factor dramatically to get to white space between dots
-  const scale = useTransform(scrollY, [0, 250], [1, 35]); 
-  // No opacity fade - we'll just zoom in until dots spread out
+  // Transform the dots opacity to slowly fade out as the entire page zooms in
+  const dotsOpacity = useTransform(scrollY, [0, 150], [1, 0.5]);
   
   // Generate dots pattern
   useEffect(() => {
@@ -58,8 +56,8 @@ export default function DotPattern() {
   return (
     <motion.div 
       ref={containerRef}
-      className="fixed inset-0 overflow-hidden pointer-events-none"
-      style={{ scale }} // Removed opacity effect
+      className="inset-0 overflow-hidden pointer-events-none"
+      style={{ opacity: dotsOpacity }}
     >
       {dots}
     </motion.div>
