@@ -1,40 +1,32 @@
-import { useCallback, useState } from "react";
+import { useEffect } from "react";
 
 export const useIntersectionObserver = (
   setActiveSection: (sectionId: string) => void
 ) => {
-  const [observer, setObserver] = useState<IntersectionObserver | null>(null);
-
-  const observeSections = useCallback(() => {
-    // Cleanup previous observer if exists
-    if (observer) {
-      observer.disconnect();
-    }
-
-    const sections = document.querySelectorAll("section[id]");
-    
-    const newObserver = new IntersectionObserver(
+  useEffect(() => {
+    const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const id = entry.target.getAttribute("id") as string;
-            setActiveSection(id);
+            if (id) {
+              setActiveSection(id);
+            }
           }
         });
       },
       { threshold: 0.3 }
     );
 
+    // Get all sections with IDs
+    const sections = document.querySelectorAll("section[id]");
     sections.forEach((section) => {
-      newObserver.observe(section);
+      observer.observe(section);
     });
 
-    setObserver(newObserver);
-
+    // Cleanup on unmount
     return () => {
-      newObserver.disconnect();
+      observer.disconnect();
     };
-  }, [observer, setActiveSection]);
-
-  return { observeSections };
+  }, [setActiveSection]); // Include setActiveSection in dependencies
 };

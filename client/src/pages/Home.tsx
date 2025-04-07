@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/sections/HeroSection";
@@ -9,11 +9,9 @@ import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState<string>("home");
-  const { observeSections } = useIntersectionObserver(setActiveSection);
-
-  useEffect(() => {
-    observeSections();
-  }, [observeSections]);
+  
+  // This will setup the observer once and handle cleanup
+  useIntersectionObserver(setActiveSection);
 
   return (
     <div className="bg-background text-text font-sans leading-relaxed">
