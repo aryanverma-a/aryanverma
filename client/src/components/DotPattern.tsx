@@ -7,8 +7,8 @@ export default function DotPattern() {
   const [dots, setDots] = useState<JSX.Element[]>([]);
   
   // Transform the dots scale based on scroll position
-  const scale = useTransform(scrollY, [0, 400], [1, 2]);
-  const opacity = useTransform(scrollY, [0, 400], [1, 0]);
+  const scale = useTransform(scrollY, [0, 400], [1, 3]); // Increased zoom factor
+  const opacity = useTransform(scrollY, [0, 300, 400], [1, 0.3, 0]); // More gradual fade
   
   // Generate dots pattern
   useEffect(() => {
