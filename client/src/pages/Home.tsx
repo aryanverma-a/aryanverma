@@ -50,7 +50,6 @@ export default function Home() {
           animate={{ opacity: isLoading ? 0 : 1 }}
           transition={{ delay: 0.5, duration: 0.5 }}
         >
-          <Header activeSection={activeSection} />
           <main className="relative z-20">
             <HeroSection />
             <AboutSection />

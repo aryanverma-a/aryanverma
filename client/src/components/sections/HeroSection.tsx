@@ -14,26 +14,7 @@ export default function HeroSection() {
 
   return (
     <section id="home" className="min-h-screen flex flex-col justify-center items-center relative">
-      <div className="container mx-auto px-6 md:px-12 max-w-5xl">
-        <motion.div 
-          className="flex flex-col items-center text-center"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8, duration: 0.8 }}
-        >
-          <motion.p 
-            className="text-lg md:text-xl text-gray-700 mb-4"
-          >
-            senior frontend engineer at <a href="https://sigma.computing" className="underline">sigma.computing</a>
-          </motion.p>
-          
-          <motion.p 
-            className="text-lg md:text-xl text-gray-700"
-          >
-            based in nyc
-          </motion.p>
-        </motion.div>
-      </div>
+      {/* Empty hero section - only name corners and dot pattern visible */}
       
       {/* Visual indicator to scroll down */}
       <motion.div 
