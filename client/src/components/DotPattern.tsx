@@ -17,7 +17,7 @@ export default function DotPattern() {
     
     const generateDots = () => {
       const dotsArray = [];
-      const spacing = 15; // Further decreased spacing for an even denser pattern
+      const spacing = 10; // Much tighter spacing for an extremely dense pattern
       const rows = Math.ceil(window.innerHeight / spacing);
       const cols = Math.ceil(window.innerWidth / spacing);
       
@@ -29,7 +29,7 @@ export default function DotPattern() {
           dotsArray.push(
             <div 
               key={`dot-${r}-${c}`}
-              className="absolute w-[2px] h-[2px] bg-black rounded-full"
+              className="absolute w-[1.5px] h-[1.5px] bg-black rounded-full"
               style={{ 
                 left: `${xPos}px`, 
                 top: `${yPos}px` 
