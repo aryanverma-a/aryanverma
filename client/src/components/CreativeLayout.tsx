@@ -63,7 +63,14 @@ export default function CreativeLayout({ children, showNameCorners = true }: Cre
         </motion.div>
       )}
       
-      {/* Zoomable viewport container with dot pattern */}
+      {/* 
+        Order is important for layering:
+        1. Dot pattern
+        2. ASCII art overlay
+        3. Main content
+      */}
+      
+      {/* Zoomable viewport container with dot pattern - lowest z-index */}
       <motion.div 
         className="fixed inset-0 z-10"
         style={{ 
@@ -76,7 +83,7 @@ export default function CreativeLayout({ children, showNameCorners = true }: Cre
         <DotPattern />
       </motion.div>
       
-      {/* Main content container - reveals when zoomed in */}
+      {/* Main content container - reveals when zoomed in - highest z-index */}
       <motion.div 
         className="relative z-20"
         style={{ opacity: contentOpacity }}

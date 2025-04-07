@@ -14,18 +14,22 @@ export default function AsciiArt() {
     container.style.justifyContent = 'center';
     container.style.width = '100%';
     container.style.height = '100%';
+    container.style.position = 'relative';
+    container.style.zIndex = '30';
     
     // Create pre element for the ASCII art
     const pre = document.createElement("pre");
     pre.style.fontFamily = 'monospace';
-    pre.style.letterSpacing = '-0.01em';
-    pre.style.fontSize = 'clamp(6px, 1vw, 10px)';
-    pre.style.lineHeight = '1';
-    pre.style.color = '#000'; // Black color with full opacity
+    pre.style.letterSpacing = '0px';
+    pre.style.fontSize = 'clamp(8px, 1.5vw, 14px)'; // Larger font size
+    pre.style.lineHeight = '0.9';
+    pre.style.color = '#000000'; // Pure black color with full opacity
     pre.style.maxWidth = '100%';
     pre.style.overflow = 'hidden';
-    pre.style.fontWeight = 'bold'; // Make it more visible
-    pre.style.textShadow = '0 0 1px rgba(0,0,0,0.3)'; // Add text shadow for better contrast
+    pre.style.fontWeight = '900'; // Make it more visible with bolder font
+    pre.style.textShadow = '0 0 3px rgba(255,255,255,1)'; // Strong white text shadow for contrast
+    pre.style.position = 'relative';
+    pre.style.zIndex = '30';
     container.appendChild(pre);
     
     // Animation variables
@@ -73,8 +77,8 @@ export default function AsciiArt() {
           // Set character at position if conditions are met
           if (m < 22 && m >= 0 && d >= 0 && d < 79 && l > r[yPos]) {
             r[yPos] = l;
-            // Use denser characters for better visibility
-            const chars = ".,_:~;=+!*#%@&";
+            // Use bolder, denser characters for better visibility on dot pattern
+            const chars = "█▓▒░@%&#$MWBNOPQDSAGHK";
             const charIndex = f > 0 ? f : 0;
             if (charIndex < chars.length) {
               a[yPos] = chars.charAt(charIndex);
@@ -90,11 +94,11 @@ export default function AsciiArt() {
     // Adjust size for responsive design - much larger for better visibility
     const handleResize = () => {
       if (window.innerWidth < 640) { // Mobile
-        pre.style.fontSize = '5px';
+        pre.style.fontSize = '8px';
       } else if (window.innerWidth < 1024) { // Tablet
-        pre.style.fontSize = '7px';
+        pre.style.fontSize = '12px';
       } else { // Desktop
-        pre.style.fontSize = '9px';
+        pre.style.fontSize = '14px';
       }
     };
     
@@ -113,12 +117,19 @@ export default function AsciiArt() {
   }, []);
 
   return (
-    <div className="ascii-art-wrapper fixed inset-0 flex items-center justify-center z-50 pointer-events-none">
+    <div className="ascii-art-wrapper fixed inset-0 flex items-center justify-center z-30 pointer-events-none">
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
-        className="ascii-art-container w-96 h-96 max-w-full flex items-center justify-center"
+        className="ascii-art-container w-[600px] h-[600px] max-w-full flex items-center justify-center"
+        style={{
+          backgroundColor: 'rgba(255, 255, 255, 0.85)', // Semi-transparent white background
+          borderRadius: '50%',  // Circular shape
+          boxShadow: '0 0 40px 20px rgba(255, 255, 255, 0.8)', // White glow effect
+          position: 'relative',
+          zIndex: 30
+        }}
       >
         <div 
           ref={asciiContainerRef} 
@@ -128,7 +139,11 @@ export default function AsciiArt() {
             height: '100%',
             display: 'flex',
             justifyContent: 'center',
-            alignItems: 'center'
+            alignItems: 'center',
+            position: 'relative',
+            zIndex: 30,
+            transform: 'translateZ(0)', // Force hardware acceleration
+            willChange: 'transform' // Hint for browser optimization
           }}
         />
       </motion.div>
