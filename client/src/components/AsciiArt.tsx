@@ -1,7 +1,10 @@
 import { useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 export default function AsciiArt() {
+  const { scrollY } = useScroll();
+  // Only show on initial view, fade out during zoom
+  const asciiOpacity = useTransform(scrollY, [0, 100, 180], [1, 0.8, 0]);
   const asciiContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -20,14 +23,15 @@ export default function AsciiArt() {
     // Create pre element for the ASCII art
     const pre = document.createElement("pre");
     pre.style.fontFamily = 'monospace';
-    pre.style.letterSpacing = '0px';
-    pre.style.fontSize = 'clamp(8px, 1.5vw, 14px)'; // Larger font size
-    pre.style.lineHeight = '0.9';
-    pre.style.color = '#000000'; // Pure black color with full opacity
+    pre.style.letterSpacing = '-1px'; // Tighter letter spacing
+    pre.style.lineHeight = '0.8'; // Tighter line height
+    pre.style.color = '#000000'; // Pure black color
     pre.style.maxWidth = '100%';
     pre.style.overflow = 'hidden';
-    pre.style.fontWeight = '900'; // Make it more visible with bolder font
-    pre.style.textShadow = '0 0 3px rgba(255,255,255,1)'; // Strong white text shadow for contrast
+    pre.style.fontWeight = '900'; // Bold font
+    pre.style.textShadow = '0 0 4px rgba(255,255,255,1)'; // Strong white text shadow for contrast
+    pre.style.whiteSpace = 'pre'; // Preserve whitespace
+    pre.style.transform = 'scale(1)'; // Initial scale
     pre.style.position = 'relative';
     pre.style.zIndex = '30';
     container.appendChild(pre);
@@ -91,14 +95,14 @@ export default function AsciiArt() {
       pre.innerHTML = a.join("");
     }, 50);
     
-    // Adjust size for responsive design - much larger for better visibility
+    // Adjust size for responsive design - even larger for better visibility
     const handleResize = () => {
       if (window.innerWidth < 640) { // Mobile
-        pre.style.fontSize = '8px';
+        pre.style.fontSize = '10px';
       } else if (window.innerWidth < 1024) { // Tablet
-        pre.style.fontSize = '12px';
+        pre.style.fontSize = '16px';
       } else { // Desktop
-        pre.style.fontSize = '14px';
+        pre.style.fontSize = '20px';
       }
     };
     
@@ -117,16 +121,20 @@ export default function AsciiArt() {
   }, []);
 
   return (
-    <div className="ascii-art-wrapper fixed inset-0 flex items-center justify-center z-30 pointer-events-none">
+    <motion.div 
+      className="ascii-art-wrapper fixed inset-0 flex items-center justify-center z-30 pointer-events-none"
+      style={{ opacity: asciiOpacity }} // Fade out when scrolling
+    >
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
-        className="ascii-art-container w-[600px] h-[600px] max-w-full flex items-center justify-center"
+        className="ascii-art-container w-[650px] h-[650px] max-w-full flex items-center justify-center"
         style={{
-          backgroundColor: 'rgba(255, 255, 255, 0.85)', // Semi-transparent white background
+          background: 'radial-gradient(circle, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.92) 70%, rgba(255, 255, 255, 0.85) 100%)',
           borderRadius: '50%',  // Circular shape
-          boxShadow: '0 0 40px 20px rgba(255, 255, 255, 0.8)', // White glow effect
+          boxShadow: '0 0 60px 40px rgba(255, 255, 255, 0.9), 0 0 5px 2px rgba(0,0,0,0.3)', // Stronger glow with subtle dark edge
+          border: '3px solid #000', // Thicker black border to make it stand out
           position: 'relative',
           zIndex: 30
         }}
@@ -147,6 +155,6 @@ export default function AsciiArt() {
           }}
         />
       </motion.div>
-    </div>
+    </motion.div>
   );
 }
