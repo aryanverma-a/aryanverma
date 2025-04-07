@@ -15,7 +15,7 @@ export default function CreativeLayout({ children, showNameCorners = true }: Cre
   const contentOpacity = useTransform(scrollY, [0, 180, 250], [0, 0, 1]);
   
   // Transform the entire page scale based on scroll position
-  const pageScale = useTransform(scrollY, [0, 250], [1, 35]);
+  const pageScale = useTransform(scrollY, [0, 250], [1, 60]);
   
   // Transform background color from black to white
   const bgColor = useTransform(
