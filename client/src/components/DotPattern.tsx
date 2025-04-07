@@ -6,8 +6,8 @@ export default function DotPattern() {
   const { scrollY } = useScroll();
   const [dots, setDots] = useState<JSX.Element[]>([]);
   
-  // Transform the dots opacity to slowly fade out as the entire page zooms in
-  const dotsOpacity = useTransform(scrollY, [0, 150], [1, 0.5]);
+  // Keep dots at full opacity throughout zoom
+  const dotsOpacity = useTransform(scrollY, [0, 150], [1, 1]);
   
   // Generate dots pattern
   useEffect(() => {

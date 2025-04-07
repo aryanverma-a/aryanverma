@@ -24,8 +24,8 @@ export default function CreativeLayout({ children, showNameCorners = true }: Cre
     ['rgba(255, 255, 255, 1)', 'rgba(255, 255, 255, 1)', 'rgba(255, 255, 255, 1)']
   );
   
-  // Transform the name corners opacity to fade out as page zooms
-  const nameOpacity = useTransform(scrollY, [0, 100], [1, 0]);
+  // Keep names fully visible until content appears
+  const nameOpacity = useTransform(scrollY, [0, 100, 250], [1, 1, 0]);
   
   // Set ready state after mount
   useEffect(() => {
