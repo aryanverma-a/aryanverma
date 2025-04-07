@@ -88,4 +88,23 @@
     font-family: monospace;
     z-index: 50;
   }
+  
+  /* Make ascii art responsive */
+  @media (max-width: 640px) {
+    .ascii-art-container pre {
+      transform: scale(0.6);
+    }
+  }
+  
+  @media (min-width: 641px) and (max-width: 1024px) {
+    .ascii-art-container pre {
+      transform: scale(0.7);
+    }
+  }
+  
+  @media (min-width: 1025px) {
+    .ascii-art-container pre {
+      transform: scale(0.8);
+    }
+  }
 }

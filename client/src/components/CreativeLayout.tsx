@@ -17,15 +17,18 @@ export default function CreativeLayout({ children, showNameCorners = true }: Cre
   // Transform the entire page scale based on scroll position
   const pageScale = useTransform(scrollY, [0, 250], [1, 150]);
   
-  // Transform background color from black to white
+  // Transform background color - keeping it white throughout
   const bgColor = useTransform(
     scrollY,
     [0, 180, 250],
     ['rgba(255, 255, 255, 1)', 'rgba(255, 255, 255, 1)', 'rgba(255, 255, 255, 1)']
   );
   
-  // Keep names fully visible until content appears
-  const nameOpacity = useTransform(scrollY, [0, 100, 250], [1, 1, 0]);
+  // Keep names fully visible until halfway through zoom
+  const nameOpacity = useTransform(scrollY, [0, 100, 150], [1, 1, 0]);
+  
+  // Keep dot pattern visible throughout zoom
+  const dotPatternOpacity = useTransform(scrollY, [0, 240, 250], [1, 1, 0]);
   
   // Set ready state after mount
   useEffect(() => {
@@ -37,7 +40,7 @@ export default function CreativeLayout({ children, showNameCorners = true }: Cre
       {/* First name in top left corner - only if showNameCorners is true */}
       {showNameCorners && (
         <motion.div 
-          className="corner-name top-0 left-0 z-30"
+          className="corner-name top-0 left-0 z-30 m-6 md:m-8"
           initial={{ opacity: 0 }}
           animate={{ opacity: isReady ? 1 : 0 }}
           transition={{ delay: 0.2, duration: 0.5 }}
@@ -50,7 +53,7 @@ export default function CreativeLayout({ children, showNameCorners = true }: Cre
       {/* Last name in bottom right corner - only if showNameCorners is true */}
       {showNameCorners && (
         <motion.div 
-          className="corner-name bottom-0 right-0 z-30"
+          className="corner-name bottom-0 right-0 z-30 m-6 md:m-8"
           initial={{ opacity: 0 }}
           animate={{ opacity: isReady ? 1 : 0 }}
           transition={{ delay: 0.2, duration: 0.5 }}
@@ -60,16 +63,20 @@ export default function CreativeLayout({ children, showNameCorners = true }: Cre
         </motion.div>
       )}
       
-      {/* Zoomable viewport container */}
+      {/* Zoomable viewport container with dot pattern */}
       <motion.div 
         className="fixed inset-0 z-10"
-        style={{ scale: pageScale, backgroundColor: bgColor }}
+        style={{ 
+          scale: pageScale, 
+          backgroundColor: bgColor,
+          opacity: dotPatternOpacity
+        }}
       >
         {/* Dot pattern background */}
         <DotPattern />
       </motion.div>
       
-      {/* Content revealer - show when page is zoomed */}
+      {/* Main content container - reveals when zoomed in */}
       <motion.div 
         className="relative z-20"
         style={{ opacity: contentOpacity }}

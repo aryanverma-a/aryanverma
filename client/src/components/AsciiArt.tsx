@@ -1,25 +1,35 @@
 import { useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useTransform, useScroll } from 'framer-motion';
 
 export default function AsciiArt() {
   const asciiContainerRef = useRef<HTMLDivElement>(null);
+  const { scrollY } = useScroll();
+  
+  // Create transform variables for zoom effect integrated with page scroll
+  const scale = useTransform(scrollY, [0, 250], [1, 150]);
+  const opacity = useTransform(scrollY, [0, 150], [1, 0]);
 
   useEffect(() => {
     if (!asciiContainerRef.current) return;
     
     // Apply CSS to container
     const container = asciiContainerRef.current;
-    container.style.color = 'white';
     container.style.display = 'flex';
     container.style.alignItems = 'center';
-    container.style.flexDirection = 'column';
+    container.style.justifyContent = 'center';
+    container.style.width = '100%';
+    container.style.height = '100%';
     
     // Create pre element for the ASCII art
     const pre = document.createElement("pre");
     pre.style.fontFamily = 'monospace';
     pre.style.letterSpacing = '-0.02em';
-    pre.style.fontSize = 'clamp(6px, 1vw, 8px)';
+    pre.style.fontSize = 'clamp(4px, 0.8vw, 8px)';
     pre.style.lineHeight = '1';
+    pre.style.color = 'black'; // Change to black color
+    pre.style.transform = 'scale(0.8)'; // Slightly smaller for better fit
+    pre.style.maxWidth = '100%';
+    pre.style.overflow = 'hidden';
     container.appendChild(pre);
     
     // Animation variables
@@ -80,9 +90,28 @@ export default function AsciiArt() {
       pre.innerHTML = a.join("");
     }, 50);
     
+    // Adjust size for responsive design
+    const handleResize = () => {
+      if (window.innerWidth < 640) { // Mobile
+        pre.style.fontSize = '3px';
+        pre.style.transform = 'scale(0.6)';
+      } else if (window.innerWidth < 1024) { // Tablet
+        pre.style.fontSize = '5px';
+        pre.style.transform = 'scale(0.7)';
+      } else { // Desktop
+        pre.style.fontSize = '7px';
+        pre.style.transform = 'scale(0.8)';
+      }
+    };
+    
+    // Initial call and add event listener
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    
     // Cleanup function
     return () => {
       clearInterval(interval);
+      window.removeEventListener('resize', handleResize);
       if (container && container.contains(pre)) {
         container.removeChild(pre);
       }
@@ -91,17 +120,26 @@ export default function AsciiArt() {
 
   return (
     <motion.div 
-      className="ascii-art-container z-40 fixed inset-0 flex items-center justify-center pointer-events-none"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ delay: 0.5, duration: 0.8 }}
+      className="ascii-art-container z-40 absolute inset-0 flex items-center justify-center pointer-events-none"
+      style={{ 
+        scale, 
+        opacity,
+        position: 'absolute',
+        width: '100%',
+        height: '100%'
+      }}
+      initial={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
     >
       <div 
         ref={asciiContainerRef} 
-        className="font-mono p-4"
+        className="font-mono"
         style={{ 
-          maxWidth: '400px',
-          maxHeight: '400px'
+          width: '100%',
+          maxWidth: '100vw',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center'
         }}
       />
     </motion.div>
