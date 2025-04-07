@@ -1,10 +1,22 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { useLocation } from 'wouter';
 
 export default function AsciiArt() {
+  const [location] = useLocation();
   const { scrollY } = useScroll();
-  // Only show on initial view, fade out during zoom
-  const asciiOpacity = useTransform(scrollY, [0, 100, 180], [1, 0.8, 0]);
+  const [isVisible, setIsVisible] = useState(true);
+  
+  // Only show on homepage and hide when scrolling
+  const asciiOpacity = useTransform(scrollY, [0, 100, 150], [1, 0.5, 0]);
+  
+  // Only show on homepage
+  useEffect(() => {
+    setIsVisible(location === "/");
+  }, [location]);
+  
+  // Hide component entirely if not on homepage
+  if (!isVisible) return null;
   const asciiContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -61,13 +73,13 @@ export default function AsciiArt() {
       const n = Math.cos(y);
       const o = Math.sin(y);
       
-      // Outer loop for the donut
-      for (let s = 0; s < 6.28; s += .07) {
+      // Outer loop for the donut - reduced step size for more detail
+      for (let s = 0; s < 6.28; s += .05) {
         const c = Math.cos(s);
         const h = Math.sin(s);
         
-        // Inner loop for the donut
-        for (let s2 = 0; s2 < 6.28; s2 += .02) {
+        // Inner loop for the donut - reduced step size for more detail
+        for (let s2 = 0; s2 < 6.28; s2 += .01) {
           const v = Math.sin(s2);
           const M = Math.cos(s2);
           const i = c + 2;
@@ -81,8 +93,8 @@ export default function AsciiArt() {
           // Set character at position if conditions are met
           if (m < 22 && m >= 0 && d >= 0 && d < 79 && l > r[yPos]) {
             r[yPos] = l;
-            // Use bolder, denser characters for better visibility on dot pattern
-            const chars = "█▓▒░@%&#$MWBNOPQDSAGHK";
+            // Use much bolder characters that will stand out better
+            const chars = "██████▓▓▓▓▓▒▒▒▒▒░░░░░";
             const charIndex = f > 0 ? f : 0;
             if (charIndex < chars.length) {
               a[yPos] = chars.charAt(charIndex);
@@ -95,14 +107,14 @@ export default function AsciiArt() {
       pre.innerHTML = a.join("");
     }, 50);
     
-    // Adjust size for responsive design - even larger for better visibility
+    // Adjust size for responsive design - extremely large for maximum visibility
     const handleResize = () => {
       if (window.innerWidth < 640) { // Mobile
-        pre.style.fontSize = '10px';
+        pre.style.fontSize = '12px';
       } else if (window.innerWidth < 1024) { // Tablet
-        pre.style.fontSize = '16px';
-      } else { // Desktop
         pre.style.fontSize = '20px';
+      } else { // Desktop
+        pre.style.fontSize = '25px';
       }
     };
     
@@ -122,21 +134,32 @@ export default function AsciiArt() {
 
   return (
     <motion.div 
-      className="ascii-art-wrapper fixed inset-0 flex items-center justify-center z-30 pointer-events-none"
-      style={{ opacity: asciiOpacity }} // Fade out when scrolling
+      className="fixed inset-0 flex items-center justify-center pointer-events-none"
+      style={{ 
+        opacity: asciiOpacity, // Fade out when scrolling
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        zIndex: 9999, // Extremely high z-index
+      }}
     >
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
-        className="ascii-art-container w-[650px] h-[650px] max-w-full flex items-center justify-center"
+        className="w-[700px] h-[700px] max-w-full flex items-center justify-center"
         style={{
-          background: 'radial-gradient(circle, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.92) 70%, rgba(255, 255, 255, 0.85) 100%)',
+          background: 'radial-gradient(circle, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.95) 70%, rgba(255, 255, 255, 0.92) 100%)',
           borderRadius: '50%',  // Circular shape
-          boxShadow: '0 0 60px 40px rgba(255, 255, 255, 0.9), 0 0 5px 2px rgba(0,0,0,0.3)', // Stronger glow with subtle dark edge
-          border: '3px solid #000', // Thicker black border to make it stand out
+          boxShadow: '0 0 80px 50px rgba(255, 255, 255, 0.95), 0 0 8px 4px rgba(0,0,0,0.5)', // Even stronger glow
+          border: '4px solid #000', // Thicker black border to make it stand out
           position: 'relative',
-          zIndex: 30
+          zIndex: 9999 // Extremely high z-index
         }}
       >
         <div 
@@ -149,7 +172,7 @@ export default function AsciiArt() {
             justifyContent: 'center',
             alignItems: 'center',
             position: 'relative',
-            zIndex: 30,
+            zIndex: 9999, // Extremely high z-index
             transform: 'translateZ(0)', // Force hardware acceleration
             willChange: 'transform' // Hint for browser optimization
           }}

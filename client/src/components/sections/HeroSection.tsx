@@ -1,26 +1,10 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import AsciiArt from "@/components/AsciiArt";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 
 export default function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollY } = useScroll();
   
-  // Apply zoom effect to the entire hero section
-  const scale = useTransform(scrollY, [0, 250], [1, 150]);
-  const opacity = useTransform(scrollY, [0, 150], [1, 0]);
-  
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      const offsetTop = element.getBoundingClientRect().top + window.scrollY - 100;
-      window.scrollTo({
-        top: offsetTop,
-        behavior: "smooth",
-      });
-    }
-  };
-
   // Add scroll instruction that fades out as user scrolls
   const scrollInstructionOpacity = useTransform(scrollY, [0, 50], [1, 0]);
 
@@ -30,8 +14,7 @@ export default function HeroSection() {
       ref={sectionRef}
       className="min-h-screen flex flex-col justify-center items-center relative overflow-hidden"
     >
-      {/* ASCII art in the middle of the hero section */}
-      <AsciiArt />
+      {/* Empty hero section - ASCII art now rendered at App level */}
       
       {/* Scroll instruction */}
       <motion.div 

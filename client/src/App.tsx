@@ -7,6 +7,7 @@ import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home";
 import Preloader from "@/components/Preloader";
 import CreativeLayout from "@/components/CreativeLayout";
+import AsciiArt from "@/components/AsciiArt";
 
 function AppRouter() {
   // Get the current location to apply creative layout appropriately
@@ -44,6 +45,8 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      {/* AsciiArt positioned first for highest rendering priority */}
+      <AsciiArt />
       <Preloader onLoadingComplete={handleLoadingComplete} />
       {!isLoading && <AppRouter />}
       <Toaster />

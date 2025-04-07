@@ -86,12 +86,20 @@
   /* ASCII art animation styles */
   .ascii-art-container {
     font-family: monospace;
-    z-index: 50;
+    z-index: 99999 !important; /* Extremely high z-index */
+  }
+  
+  .ascii-art-wrapper {
+    isolation: isolate;
+    position: fixed !important;
+    z-index: 99999 !important; /* Extremely high z-index */
+    pointer-events: none !important;
   }
   
   .ascii-art-wrapper pre {
     color: black !important;
     font-weight: bold !important;
+    text-shadow: 0 0 5px rgba(255,255,255,1) !important; /* Strong white shadow */
   }
   
   /* Make ascii art responsive */
