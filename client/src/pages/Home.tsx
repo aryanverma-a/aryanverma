@@ -71,7 +71,7 @@ export default function Home() {
             <HeroSection />
             
             {/* Content that appears after scroll */}
-            <div className="mt-[100vh]"> {/* Push content down below fold */}
+            <div className="mt-[100vh] bg-white"> {/* Push content down below fold and add white background */}
               <AboutSection />
               <WorkSection />
               <ContactSection />

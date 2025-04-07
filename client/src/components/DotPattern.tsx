@@ -20,18 +20,40 @@ export default function DotPattern() {
       const rows = Math.ceil(window.innerHeight / spacing);
       const cols = Math.ceil(window.innerWidth / spacing);
       
+      // Define safe zones for the names (no dots in these areas)
+      const topLeftSafeZone = {
+        x: window.innerWidth * 0.4, // 40% of screen width
+        y: window.innerHeight * 0.3, // 30% of screen height
+      };
+      
+      const bottomRightSafeZone = {
+        x: window.innerWidth * 0.6, // 60% of screen width from left
+        y: window.innerHeight * 0.7, // 70% of screen height from top
+      };
+      
       for (let r = 0; r < rows; r++) {
         for (let c = 0; c < cols; c++) {
-          dotsArray.push(
-            <div 
-              key={`dot-${r}-${c}`}
-              className="absolute w-[3px] h-[3px] bg-gray-300 rounded-full"
-              style={{ 
-                left: `${c * spacing}px`, 
-                top: `${r * spacing}px` 
-              }}
-            />
-          );
+          const xPos = c * spacing;
+          const yPos = r * spacing;
+          
+          // Skip dots in the top-left safe zone (for "matt")
+          const inTopLeftSafeZone = xPos < topLeftSafeZone.x && yPos < topLeftSafeZone.y;
+          
+          // Skip dots in the bottom-right safe zone (for "bierman")
+          const inBottomRightSafeZone = xPos > bottomRightSafeZone.x && yPos > bottomRightSafeZone.y;
+          
+          if (!inTopLeftSafeZone && !inBottomRightSafeZone) {
+            dotsArray.push(
+              <div 
+                key={`dot-${r}-${c}`}
+                className="absolute w-[3px] h-[3px] bg-black rounded-full" // Changed to black
+                style={{ 
+                  left: `${xPos}px`, 
+                  top: `${yPos}px` 
+                }}
+              />
+            );
+          }
         }
       }
       return dotsArray;
