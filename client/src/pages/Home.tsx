@@ -1,91 +1,34 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/sections/HeroSection";
 import AboutSection from "@/components/sections/AboutSection";
 import WorkSection from "@/components/sections/WorkSection";
 import ContactSection from "@/components/sections/ContactSection";
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
-import DotPattern from "@/components/DotPattern";
-import Preloader from "@/components/Preloader";
-import { motion, useScroll, useTransform } from "framer-motion";
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState<string>("home");
-  const [isLoading, setIsLoading] = useState(true);
-  const { scrollY } = useScroll();
-  
-  // Transform content opacity based on scroll position
-  // Reveal the content as dots reach maximum zoom
-  const contentOpacity = useTransform(scrollY, [0, 150, 200], [0, 0, 1]);
   
   // This will setup the observer once and handle cleanup
   useIntersectionObserver(setActiveSection);
-  
-  // Lock scroll during loading
-  useEffect(() => {
-    if (isLoading) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [isLoading]);
 
   return (
-    <>
-      <Preloader onLoadingComplete={() => setIsLoading(false)} />
+    <main>
+      {/* Hero section - always visible */}
+      <HeroSection />
       
-      <div className="bg-background text-text font-sans leading-relaxed">
-        {/* First name in top left corner */}
-        <motion.div 
-          className="fixed top-0 left-0 text-[15vw] font-bold leading-none z-10"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: isLoading ? 0 : 1 }}
-          transition={{ delay: 0.2, duration: 0.5 }}
-        >
-          matt
-        </motion.div>
-        
-        {/* Last name in bottom right corner */}
-        <motion.div 
-          className="fixed bottom-0 right-0 text-[15vw] font-bold leading-none z-10"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: isLoading ? 0 : 1 }}
-          transition={{ delay: 0.2, duration: 0.5 }}
-        >
-          bierman
-        </motion.div>
-        
-        {/* Dot pattern background - they zoom in on scroll without fading */}
-        {!isLoading && <DotPattern />}
-        
-        {/* Content revealer - show only when dots are fully zoomed */}
-        <motion.div 
-          className="relative z-20"
-          style={{ opacity: contentOpacity }}
-        >
-          <main>
-            {/* Hero section - always visible */}
-            <HeroSection />
-            
-            {/* Content sections fade in with white background */}
-            <div className="min-h-screen"> 
-              {/* First screen - hero only */}
-            </div>
-            
-            {/* Other sections with white background - stacked vertically for normal scrolling */}
-            <div className="bg-white pt-20 pb-20">
-              <AboutSection />
-              <WorkSection />
-              <ContactSection />
-              <Footer />
-            </div>
-          </main>
-        </motion.div>
+      {/* Content sections fade in with white background */}
+      <div className="min-h-screen"> 
+        {/* First screen - hero only */}
       </div>
-    </>
+      
+      {/* Other sections with white background - stacked vertically for normal scrolling */}
+      <div className="bg-white pt-20 pb-20">
+        <AboutSection />
+        <WorkSection />
+        <ContactSection />
+        <Footer />
+      </div>
+    </main>
   );
 }
