@@ -10,6 +10,10 @@ export default function AsciiArt() {
   // Only show on homepage and hide when scrolling
   const asciiOpacity = useTransform(scrollY, [0, 100, 150], [1, 0.5, 0]);
   
+  // Calculate zoom scale based on scroll position (zoom in when scrolling)
+  // Match the timing of the page zoom effect (0-250px scroll range)
+  const zoomScale = useTransform(scrollY, [0, 250], [1, 150]);
+  
   // Only show on homepage
   useEffect(() => {
     setIsVisible(location === "/");
@@ -22,7 +26,7 @@ export default function AsciiArt() {
   useEffect(() => {
     if (!asciiContainerRef.current) return;
     
-    // Apply CSS to container
+    // Apply CSS to container for perfect centering
     const container = asciiContainerRef.current;
     container.style.display = 'flex';
     container.style.alignItems = 'center';
@@ -30,22 +34,26 @@ export default function AsciiArt() {
     container.style.width = '100%';
     container.style.height = '100%';
     container.style.position = 'relative';
-    container.style.zIndex = '30';
+    container.style.left = '0';
+    container.style.top = '0';
+    container.style.right = '0';
+    container.style.bottom = '0';
+    container.style.margin = 'auto';
+    container.style.zIndex = '9999';
     
     // Create pre element for the ASCII art
     const pre = document.createElement("pre");
     pre.style.fontFamily = 'monospace';
-    pre.style.letterSpacing = '-1px'; // Tighter letter spacing
-    pre.style.lineHeight = '0.8'; // Tighter line height
+    pre.style.letterSpacing = '-0.5px'; // Slightly tighter letter spacing
+    pre.style.lineHeight = '1'; // Normal line height for better readability
     pre.style.color = '#000000'; // Pure black color
     pre.style.maxWidth = '100%';
     pre.style.overflow = 'hidden';
-    pre.style.fontWeight = '900'; // Bold font
-    pre.style.textShadow = '0 0 4px rgba(255,255,255,1)'; // Strong white text shadow for contrast
+    pre.style.fontWeight = '700'; // Medium-bold font
     pre.style.whiteSpace = 'pre'; // Preserve whitespace
     pre.style.transform = 'scale(1)'; // Initial scale
     pre.style.position = 'relative';
-    pre.style.zIndex = '30';
+    pre.style.zIndex = '9999'; // Very high z-index
     container.appendChild(pre);
     
     // Animation variables
@@ -93,8 +101,8 @@ export default function AsciiArt() {
           // Set character at position if conditions are met
           if (m < 22 && m >= 0 && d >= 0 && d < 79 && l > r[yPos]) {
             r[yPos] = l;
-            // Use much bolder characters that will stand out better
-            const chars = "██████▓▓▓▓▓▒▒▒▒▒░░░░░";
+            // Use original ASCII characters for classic look
+            const chars = "@%&#*+=-:. ";
             const charIndex = f > 0 ? f : 0;
             if (charIndex < chars.length) {
               a[yPos] = chars.charAt(charIndex);
@@ -107,14 +115,14 @@ export default function AsciiArt() {
       pre.innerHTML = a.join("");
     }, 50);
     
-    // Adjust size for responsive design - extremely large for maximum visibility
+    // Adjust size for responsive design - smaller for a more compact look
     const handleResize = () => {
       if (window.innerWidth < 640) { // Mobile
-        pre.style.fontSize = '12px';
+        pre.style.fontSize = '8px';
       } else if (window.innerWidth < 1024) { // Tablet
-        pre.style.fontSize = '20px';
+        pre.style.fontSize = '12px';
       } else { // Desktop
-        pre.style.fontSize = '25px';
+        pre.style.fontSize = '16px';
       }
     };
     
@@ -152,14 +160,14 @@ export default function AsciiArt() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
-        className="w-[700px] h-[700px] max-w-full flex items-center justify-center"
-        style={{
-          background: 'radial-gradient(circle, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.95) 70%, rgba(255, 255, 255, 0.92) 100%)',
-          borderRadius: '50%',  // Circular shape
-          boxShadow: '0 0 80px 50px rgba(255, 255, 255, 0.95), 0 0 8px 4px rgba(0,0,0,0.5)', // Even stronger glow
-          border: '4px solid #000', // Thicker black border to make it stand out
-          position: 'relative',
-          zIndex: 9999 // Extremely high z-index
+        style={{ 
+          width: '450px', 
+          height: '450px', 
+          maxWidth: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          scale: zoomScale // Apply zoom scale based on scroll
         }}
       >
         <div 
@@ -172,7 +180,7 @@ export default function AsciiArt() {
             justifyContent: 'center',
             alignItems: 'center',
             position: 'relative',
-            zIndex: 9999, // Extremely high z-index
+            zIndex: 9999,
             transform: 'translateZ(0)', // Force hardware acceleration
             willChange: 'transform' // Hint for browser optimization
           }}

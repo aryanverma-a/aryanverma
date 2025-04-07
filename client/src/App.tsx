@@ -45,8 +45,8 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* AsciiArt positioned first for highest rendering priority */}
-      <AsciiArt />
+      {/* Only show ASCII art after preloading is complete */}
+      {!isLoading && <AsciiArt />}
       <Preloader onLoadingComplete={handleLoadingComplete} />
       {!isLoading && <AppRouter />}
       <Toaster />
