@@ -82,4 +82,10 @@
     line-height: 100%;
     letter-spacing: -3px;
   }
+  
+  /* ASCII art animation styles */
+  .ascii-art-container {
+    font-family: monospace;
+    z-index: 50;
+  }
 }

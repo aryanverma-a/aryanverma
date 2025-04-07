@@ -5,41 +5,86 @@ export default function AsciiArt() {
   const asciiContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Function to load the ASCII art
-    const loadAsciiArt = () => {
-      if (!asciiContainerRef.current) return;
-      
-      // Create script element
-      const script = document.createElement('script');
-      script.src = 'http://www.qqpr.com/ascii/js/1023.js';
-      script.async = true;
-      
-      // Handle script loading error
-      script.onerror = () => {
-        if (asciiContainerRef.current) {
-          asciiContainerRef.current.innerHTML = `
-          <pre class="ascii-fallback">
-           _   _                                                         
-          | | | |                                                        
-          | |_| | ___ _ __ ___     ___  ___  ___  _ __                  
-          |  _  |/ _ \\ '__/ _ \\   / __|/ _ \\/ _ \\| '_ \\                 
-          | | | |  __/ | | (_) |  \\__ \\  __/ (_) | | | |                
-          \\_| |_/\\___|_|  \\___/   |___/\\___|\\___/|_| |_|                
-                                                                </pre>`;
-        }
-      };
-      
-      // Append script to container
-      asciiContainerRef.current.appendChild(script);
-    };
+    if (!asciiContainerRef.current) return;
     
-    loadAsciiArt();
+    // Apply CSS to container
+    const container = asciiContainerRef.current;
+    container.style.color = 'white';
+    container.style.display = 'flex';
+    container.style.alignItems = 'center';
+    container.style.flexDirection = 'column';
+    
+    // Create pre element for the ASCII art
+    const pre = document.createElement("pre");
+    pre.style.fontFamily = 'monospace';
+    pre.style.letterSpacing = '-0.02em';
+    pre.style.fontSize = 'clamp(6px, 1vw, 8px)';
+    pre.style.lineHeight = '1';
+    container.appendChild(pre);
+    
+    // Animation variables
+    let x = 1760;
+    let z = 0;
+    let y = 0;
+    
+    // Create and run the donut animation
+    const interval = setInterval(() => {
+      z += .07;
+      y += .03;
+      
+      // Create empty array for ASCII art characters
+      const a: Array<string> = [];
+      for (let i = 0; i < x; i++) {
+        a[i] = i % 80 === 79 ? "\n" : " ";
+      }
+      
+      // Create empty array for depth values
+      const r = new Array(x).fill(0);
+      
+      // Calculate sine and cosine values
+      const t = Math.cos(z);
+      const e = Math.sin(z);
+      const n = Math.cos(y);
+      const o = Math.sin(y);
+      
+      // Outer loop for the donut
+      for (let s = 0; s < 6.28; s += .07) {
+        const c = Math.cos(s);
+        const h = Math.sin(s);
+        
+        // Inner loop for the donut
+        for (let s2 = 0; s2 < 6.28; s2 += .02) {
+          const v = Math.sin(s2);
+          const M = Math.cos(s2);
+          const i = c + 2;
+          const l = 1 / (v * i * e + h * t + 5);
+          const p = v * i * t - h * e;
+          const d = 0 | 40 + 30 * l * (M * i * n - p * o);
+          const m = 0 | 12 + 15 * l * (M * i * o + p * n);
+          const f = 0 | 8 * ((h * e - v * c * t) * n - v * c * e - h * t - M * c * o);
+          const yPos = d + 80 * m;
+          
+          // Set character at position if conditions are met
+          if (m < 22 && m >= 0 && d >= 0 && d < 79 && l > r[yPos]) {
+            r[yPos] = l;
+            const chars = ".,-~:;=!*#$@";
+            const charIndex = f > 0 ? f : 0;
+            if (charIndex < chars.length) {
+              a[yPos] = chars.charAt(charIndex);
+            }
+          }
+        }
+      }
+      
+      // Update the pre element with the ASCII art
+      pre.innerHTML = a.join("");
+    }, 50);
     
     // Cleanup function
     return () => {
-      if (asciiContainerRef.current) {
-        const scripts = asciiContainerRef.current.getElementsByTagName('script');
-        Array.from(scripts).forEach(script => script.remove());
+      clearInterval(interval);
+      if (container && container.contains(pre)) {
+        container.removeChild(pre);
       }
     };
   }, []);
@@ -53,13 +98,12 @@ export default function AsciiArt() {
     >
       <div 
         ref={asciiContainerRef} 
-        className="text-black text-xs md:text-sm font-mono whitespace-pre"
+        className="font-mono p-4"
         style={{ 
-          fontSize: 'clamp(4px, 1vw, 10px)',
-          lineHeight: 1,
-          letterSpacing: '-0.02em'
+          maxWidth: '400px',
+          maxHeight: '400px'
         }}
-      ></div>
+      />
     </motion.div>
   );
 }
