@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 97%;
+    --foreground: 0 0% 20%;
+    
+    --primary: 0 0% 10%;
+    --primary-foreground: 0 0% 98%;
+    
+    --secondary: 0 0% 46%;
+    --secondary-foreground: 0 0% 98%;
+    
+    --accent: 230 100% 62%;
+    --accent-foreground: 0 0% 100%;
+    
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 20%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 20%;
+    
+    --border: 0 0% 92%;
+    --input: 0 0% 92%;
+    --ring: 230 100% 62%;
+    
+    --radius: 0.125rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground overflow-x-hidden;
+  }
+
+  /* Custom CSS classes */
+  .text-xxs {
+    font-size: 0.625rem;
+  }
+
+  .nav-link {
+    position: relative;
+  }
+
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: 0;
+    left: 0;
+    background-color: hsl(var(--accent));
+    transition: width 0.3s ease;
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  input:focus, textarea:focus {
+    border-color: hsl(var(--accent)) !important;
+    outline: none;
+  }
+}
