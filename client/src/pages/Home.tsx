@@ -14,8 +14,9 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const { scrollY } = useScroll();
   
-  // Transform content opacity based on scroll to reveal content as dots fade
-  const contentOpacity = useTransform(scrollY, [0, 300, 400], [0, 0, 1]);
+  // Transform content opacity based on scroll position
+  // Delay the content reveal until dots are sufficiently zoomed out
+  const contentOpacity = useTransform(scrollY, [0, 350, 400], [0, 0, 1]);
   
   // This will setup the observer once and handle cleanup
   useIntersectionObserver(setActiveSection);
@@ -58,10 +59,10 @@ export default function Home() {
           bierman
         </motion.div>
         
-        {/* Dot pattern background - they zoom in on scroll */}
+        {/* Dot pattern background - they zoom in on scroll without fading */}
         {!isLoading && <DotPattern />}
         
-        {/* Content revealer - show only when scrolled down */}
+        {/* Content revealer - show only when dots are fully zoomed */}
         <motion.div 
           className="relative z-20"
           style={{ opacity: contentOpacity }}
@@ -70,8 +71,8 @@ export default function Home() {
             {/* Hero section - always visible */}
             <HeroSection />
             
-            {/* Content that appears after scroll */}
-            <div className="mt-[100vh] bg-white"> {/* Push content down below fold and add white background */}
+            {/* Content that appears after scroll, with white background */}
+            <div className="mt-[100vh] bg-white"> {/* Push content down below fold */}
               <AboutSection />
               <WorkSection />
               <ContactSection />

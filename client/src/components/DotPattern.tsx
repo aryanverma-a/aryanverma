@@ -7,8 +7,9 @@ export default function DotPattern() {
   const [dots, setDots] = useState<JSX.Element[]>([]);
   
   // Transform the dots scale based on scroll position
-  const scale = useTransform(scrollY, [0, 400], [1, 3]); // Increased zoom factor
-  const opacity = useTransform(scrollY, [0, 300, 400], [1, 0.3, 0]); // More gradual fade
+  // Increase zoom factor to get to white space between dots
+  const scale = useTransform(scrollY, [0, 400], [1, 12]); 
+  // No opacity fade - we'll just zoom in until dots spread out
   
   // Generate dots pattern
   useEffect(() => {
@@ -16,19 +17,28 @@ export default function DotPattern() {
     
     const generateDots = () => {
       const dotsArray = [];
-      const spacing = 20;
+      const spacing = 25; // Increased spacing between dots
       const rows = Math.ceil(window.innerHeight / spacing);
       const cols = Math.ceil(window.innerWidth / spacing);
       
+      // Calculate safe zone dimensions based on text size
+      // "matt" is about 4 characters wide
+      const mattWordWidth = window.innerWidth * 0.25; // Approx 25% of screen width for "matt"
+      const mattWordHeight = window.innerHeight * 0.15; // Approx height for "matt"
+      
+      // "bierman" is about 7 characters wide
+      const biermanWordWidth = window.innerWidth * 0.35; // Approx 35% of screen width for "bierman"
+      const biermanWordHeight = window.innerHeight * 0.15; // Approx height for "bierman"
+      
       // Define safe zones for the names (no dots in these areas)
       const topLeftSafeZone = {
-        x: window.innerWidth * 0.4, // 40% of screen width
-        y: window.innerHeight * 0.3, // 30% of screen height
+        x: mattWordWidth,
+        y: mattWordHeight,
       };
       
       const bottomRightSafeZone = {
-        x: window.innerWidth * 0.6, // 60% of screen width from left
-        y: window.innerHeight * 0.7, // 70% of screen height from top
+        x: window.innerWidth - biermanWordWidth,
+        y: window.innerHeight - biermanWordHeight,
       };
       
       for (let r = 0; r < rows; r++) {
@@ -46,7 +56,7 @@ export default function DotPattern() {
             dotsArray.push(
               <div 
                 key={`dot-${r}-${c}`}
-                className="absolute w-[3px] h-[3px] bg-black rounded-full" // Changed to black
+                className="absolute w-[2.5px] h-[2.5px] bg-black rounded-full"
                 style={{ 
                   left: `${xPos}px`, 
                   top: `${yPos}px` 
@@ -77,7 +87,7 @@ export default function DotPattern() {
     <motion.div 
       ref={containerRef}
       className="fixed inset-0 overflow-hidden pointer-events-none"
-      style={{ scale, opacity }}
+      style={{ scale }} // Removed opacity effect
     >
       {dots}
     </motion.div>
