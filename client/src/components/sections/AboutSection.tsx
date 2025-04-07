@@ -48,7 +48,7 @@ export default function AboutSection() {
             variants={itemVariants}
           >
             About Me
-            <span className="absolute bottom-0 left-0 w-20 h-1 bg-accent mt-2"></span>
+            <span className="absolute bottom-0 left-0 w-20 h-1 bg-black mt-2"></span>
           </motion.h2>
           
           <div className="space-y-6 text-lg">
@@ -78,7 +78,7 @@ export default function AboutSection() {
                 {skills.map((skill, index) => (
                   <motion.span 
                     key={index}
-                    className="px-4 py-2 bg-background text-primary rounded-sm font-mono text-sm"
+                    className="px-4 py-2 bg-gray-100 text-black rounded-sm font-mono text-sm"
                     initial={{ opacity: 0, y: 10 }}
                     whileInView={{ 
                       opacity: 1, 

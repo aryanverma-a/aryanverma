@@ -31,7 +31,7 @@ export default function Footer() {
               className="text-xl font-bold relative"
               onClick={(e) => { e.preventDefault(); scrollToSection("#home"); }}
             >
-              <span className="text-primary">John.Doe</span>
+              <span className="text-black">John.Doe</span>
               <CursorBlink />
             </a>
           </div>
@@ -42,7 +42,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <a 
                     href={link.href}
-                    className="text-secondary text-sm hover:text-accent transition-colors"
+                    className="text-gray-600 text-sm hover:text-black transition-colors"
                     onClick={(e) => { e.preventDefault(); scrollToSection(link.href); }}
                   >
                     {link.label}
@@ -52,7 +52,7 @@ export default function Footer() {
             </ul>
           </nav>
           
-          <div className="text-xs text-secondary">
+          <div className="text-xs text-gray-600">
             &copy; {currentYear} John Doe. All rights reserved.
           </div>
         </div>

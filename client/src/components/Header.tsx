@@ -62,12 +62,12 @@ export default function Header({ activeSection }: HeaderProps) {
               <li key={link.href}>
                 <a 
                   href={link.href}
-                  className={`nav-link py-2 px-1 text-sm font-medium transition-colors relative ${activeSection === link.href.substring(1) ? "text-accent" : "text-text hover:text-accent"}`}
+                  className={`nav-link py-2 px-1 text-sm font-medium transition-colors relative ${activeSection === link.href.substring(1) ? "text-black" : "text-gray-600 hover:text-black"}`}
                   onClick={(e) => { e.preventDefault(); scrollToSection(link.href); }}
                 >
                   {link.label}
                   <motion.span 
-                    className="absolute bottom-0 left-0 h-[1px] bg-accent"
+                    className="absolute bottom-0 left-0 h-[1px] bg-black"
                     initial={{ width: 0 }}
                     animate={{ width: activeSection === link.href.substring(1) ? "100%" : 0 }}
                     transition={{ duration: 0.3 }}
@@ -103,7 +103,7 @@ export default function Header({ activeSection }: HeaderProps) {
                   <li key={link.href}>
                     <a 
                       href={link.href}
-                      className={`block py-2 font-medium transition-colors ${activeSection === link.href.substring(1) ? "text-accent" : "text-text hover:text-accent"}`}
+                      className={`block py-2 font-medium transition-colors ${activeSection === link.href.substring(1) ? "text-black" : "text-gray-600 hover:text-black"}`}
                       onClick={(e) => { e.preventDefault(); scrollToSection(link.href); }}
                     >
                       {link.label}

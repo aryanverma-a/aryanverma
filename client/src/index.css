@@ -13,7 +13,7 @@
     --secondary: 0 0% 46%;
     --secondary-foreground: 0 0% 98%;
     
-    --accent: 230 100% 62%;
+    --accent: 0 0% 0%;
     --accent-foreground: 0 0% 100%;
     
     --card: 0 0% 100%;
@@ -24,7 +24,7 @@
     
     --border: 0 0% 92%;
     --input: 0 0% 92%;
-    --ring: 230 100% 62%;
+    --ring: 0 0% 0%;
     
     --radius: 0.125rem;
   }
@@ -57,7 +57,7 @@
     height: 1px;
     bottom: 0;
     left: 0;
-    background-color: hsl(var(--accent));
+    background-color: black;
     transition: width 0.3s ease;
   }
 
@@ -66,7 +66,7 @@
   }
 
   input:focus, textarea:focus {
-    border-color: hsl(var(--accent)) !important;
+    border-color: black !important;
     outline: none;
   }
 }

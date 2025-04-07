@@ -75,7 +75,7 @@ export default function WorkSection() {
             variants={headerVariants}
           >
             Selected Work
-            <span className="absolute bottom-0 left-0 w-20 h-1 bg-accent mt-2"></span>
+            <span className="absolute bottom-0 left-0 w-20 h-1 bg-black mt-2"></span>
           </motion.h2>
           
           <div className="grid md:grid-cols-2 gap-8">
@@ -92,7 +92,7 @@ export default function WorkSection() {
             className="mt-12 text-center"
             variants={headerVariants}
           >
-            <a href="#" className="inline-flex items-center justify-center px-7 py-3 border border-primary text-primary font-medium rounded-sm hover:bg-primary hover:text-white transition-all">
+            <a href="#" className="inline-flex items-center justify-center px-7 py-3 border border-black text-black font-medium rounded-sm hover:bg-black hover:text-white transition-all">
               View All Projects <i className="fas fa-arrow-right ml-2 text-sm"></i>
             </a>
           </motion.div>

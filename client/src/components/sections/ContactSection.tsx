@@ -115,7 +115,7 @@ export default function ContactSection() {
             variants={itemVariants}
           >
             Get in Touch
-            <span className="absolute bottom-0 left-0 w-20 h-1 bg-accent mt-2"></span>
+            <span className="absolute bottom-0 left-0 w-20 h-1 bg-black mt-2"></span>
           </motion.h2>
           
           <div className="grid md:grid-cols-2 gap-10">
@@ -126,33 +126,33 @@ export default function ContactSection() {
               
               <div className="space-y-4 mb-8">
                 <div className="flex items-center space-x-4">
-                  <div className="text-accent w-6 text-center">
+                  <div className="text-black w-6 text-center">
                     <i className="fas fa-envelope"></i>
                   </div>
-                  <a href="mailto:hello@johndoe.com" className="text-primary hover:text-accent transition-colors">
+                  <a href="mailto:hello@johndoe.com" className="text-gray-900 hover:text-black transition-colors">
                     hello@johndoe.com
                   </a>
                 </div>
                 
                 <div className="flex items-center space-x-4">
-                  <div className="text-accent w-6 text-center">
+                  <div className="text-black w-6 text-center">
                     <i className="fas fa-map-marker-alt"></i>
                   </div>
-                  <span className="text-secondary">San Francisco, CA</span>
+                  <span className="text-gray-700">San Francisco, CA</span>
                 </div>
               </div>
               
               <div className="flex space-x-5">
-                <a href="#" className="text-secondary hover:text-accent transition-colors" aria-label="GitHub">
+                <a href="#" className="text-gray-700 hover:text-black transition-colors" aria-label="GitHub">
                   <i className="fab fa-github text-xl"></i>
                 </a>
-                <a href="#" className="text-secondary hover:text-accent transition-colors" aria-label="LinkedIn">
+                <a href="#" className="text-gray-700 hover:text-black transition-colors" aria-label="LinkedIn">
                   <i className="fab fa-linkedin-in text-xl"></i>
                 </a>
-                <a href="#" className="text-secondary hover:text-accent transition-colors" aria-label="Twitter">
+                <a href="#" className="text-gray-700 hover:text-black transition-colors" aria-label="Twitter">
                   <i className="fab fa-twitter text-xl"></i>
                 </a>
-                <a href="#" className="text-secondary hover:text-accent transition-colors" aria-label="Dribbble">
+                <a href="#" className="text-gray-700 hover:text-black transition-colors" aria-label="Dribbble">
                   <i className="fab fa-dribbble text-xl"></i>
                 </a>
               </div>
@@ -202,7 +202,7 @@ export default function ContactSection() {
                 <div>
                   <button 
                     type="submit" 
-                    className="w-full px-6 py-3 bg-primary text-white font-medium rounded-sm hover:bg-opacity-90 transition-all disabled:opacity-70"
+                    className="w-full px-6 py-3 bg-black text-white font-medium rounded-sm hover:bg-opacity-90 transition-all disabled:opacity-70"
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? "Sending..." : "Send Message"}
