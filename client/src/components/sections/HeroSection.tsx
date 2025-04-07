@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import AsciiArt from "@/components/AsciiArt";
 
 export default function HeroSection() {
   const scrollToSection = (href: string) => {
@@ -14,6 +15,9 @@ export default function HeroSection() {
 
   return (
     <section id="home" className="min-h-screen flex flex-col justify-center items-center relative">
+      {/* Added ASCII art in the middle of the first page */}
+      <AsciiArt />
+      
       {/* Empty hero section - only name corners and dot pattern visible */}
     </section>
   );
