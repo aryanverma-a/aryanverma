@@ -1,13 +1,8 @@
 import { useEffect, useRef } from 'react';
-import { motion, useTransform, useScroll } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 export default function AsciiArt() {
   const asciiContainerRef = useRef<HTMLDivElement>(null);
-  const { scrollY } = useScroll();
-  
-  // Create transform variables for zoom effect integrated with page scroll
-  const scale = useTransform(scrollY, [0, 250], [1, 150]);
-  const opacity = useTransform(scrollY, [0, 150], [1, 0]);
 
   useEffect(() => {
     if (!asciiContainerRef.current) return;
@@ -23,13 +18,14 @@ export default function AsciiArt() {
     // Create pre element for the ASCII art
     const pre = document.createElement("pre");
     pre.style.fontFamily = 'monospace';
-    pre.style.letterSpacing = '-0.02em';
-    pre.style.fontSize = 'clamp(4px, 0.8vw, 8px)';
+    pre.style.letterSpacing = '-0.01em';
+    pre.style.fontSize = 'clamp(6px, 1vw, 10px)';
     pre.style.lineHeight = '1';
-    pre.style.color = 'black'; // Change to black color
-    pre.style.transform = 'scale(0.8)'; // Slightly smaller for better fit
+    pre.style.color = '#000'; // Black color with full opacity
     pre.style.maxWidth = '100%';
     pre.style.overflow = 'hidden';
+    pre.style.fontWeight = 'bold'; // Make it more visible
+    pre.style.textShadow = '0 0 1px rgba(0,0,0,0.3)'; // Add text shadow for better contrast
     container.appendChild(pre);
     
     // Animation variables
@@ -77,7 +73,8 @@ export default function AsciiArt() {
           // Set character at position if conditions are met
           if (m < 22 && m >= 0 && d >= 0 && d < 79 && l > r[yPos]) {
             r[yPos] = l;
-            const chars = ".,-~:;=!*#$@";
+            // Use denser characters for better visibility
+            const chars = ".,_:~;=+!*#%@&";
             const charIndex = f > 0 ? f : 0;
             if (charIndex < chars.length) {
               a[yPos] = chars.charAt(charIndex);
@@ -90,17 +87,14 @@ export default function AsciiArt() {
       pre.innerHTML = a.join("");
     }, 50);
     
-    // Adjust size for responsive design
+    // Adjust size for responsive design - much larger for better visibility
     const handleResize = () => {
       if (window.innerWidth < 640) { // Mobile
-        pre.style.fontSize = '3px';
-        pre.style.transform = 'scale(0.6)';
-      } else if (window.innerWidth < 1024) { // Tablet
         pre.style.fontSize = '5px';
-        pre.style.transform = 'scale(0.7)';
-      } else { // Desktop
+      } else if (window.innerWidth < 1024) { // Tablet
         pre.style.fontSize = '7px';
-        pre.style.transform = 'scale(0.8)';
+      } else { // Desktop
+        pre.style.fontSize = '9px';
       }
     };
     
@@ -119,29 +113,25 @@ export default function AsciiArt() {
   }, []);
 
   return (
-    <motion.div 
-      className="ascii-art-container z-40 absolute inset-0 flex items-center justify-center pointer-events-none"
-      style={{ 
-        scale, 
-        opacity,
-        position: 'absolute',
-        width: '100%',
-        height: '100%'
-      }}
-      initial={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-    >
-      <div 
-        ref={asciiContainerRef} 
-        className="font-mono"
-        style={{ 
-          width: '100%',
-          maxWidth: '100vw',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center'
-        }}
-      />
-    </motion.div>
+    <div className="ascii-art-wrapper fixed inset-0 flex items-center justify-center z-50 pointer-events-none">
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        className="ascii-art-container w-96 h-96 max-w-full flex items-center justify-center"
+      >
+        <div 
+          ref={asciiContainerRef} 
+          className="font-mono"
+          style={{ 
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        />
+      </motion.div>
+    </div>
   );
 }

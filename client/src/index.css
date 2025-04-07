@@ -89,22 +89,27 @@
     z-index: 50;
   }
   
-  /* Make ascii art responsive */
-  @media (max-width: 640px) {
-    .ascii-art-container pre {
-      transform: scale(0.6);
-    }
+  .ascii-art-wrapper pre {
+    color: black !important;
+    font-weight: bold !important;
   }
   
-  @media (min-width: 641px) and (max-width: 1024px) {
-    .ascii-art-container pre {
+  /* Make ascii art responsive */
+  @media (max-width: 640px) {
+    .ascii-art-container {
       transform: scale(0.7);
     }
   }
   
+  @media (min-width: 641px) and (max-width: 1024px) {
+    .ascii-art-container {
+      transform: scale(0.85);
+    }
+  }
+  
   @media (min-width: 1025px) {
-    .ascii-art-container pre {
-      transform: scale(0.8);
+    .ascii-art-container {
+      transform: scale(1);
     }
   }
 }
