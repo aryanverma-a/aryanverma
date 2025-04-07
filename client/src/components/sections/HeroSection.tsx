@@ -12,73 +12,47 @@ export default function HeroSection() {
     }
   };
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { 
-        duration: 0.6,
-        ease: "easeOut"
-      }
-    }
-  };
-
   return (
-    <section id="home" className="min-h-screen flex items-center pt-20">
-      <div className="container mx-auto px-6 md:px-12 py-20">
+    <section id="home" className="min-h-screen flex flex-col justify-center items-center relative">
+      <div className="container mx-auto px-6 md:px-12 max-w-5xl">
         <motion.div 
-          className="max-w-2xl mx-auto"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
+          className="flex flex-col items-center text-center"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8, duration: 0.8 }}
         >
-          <motion.h1 
-            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight"
-            variants={itemVariants}
-          >
-            <span className="block">Hello, I'm</span>
-            <span className="block text-primary">John Doe</span>
-          </motion.h1>
-          
           <motion.p 
-            className="text-xl md:text-2xl text-secondary mb-10 leading-relaxed"
-            variants={itemVariants}
+            className="text-lg md:text-xl text-gray-700 mb-4"
           >
-            Frontend developer crafting intuitive and responsive digital experiences.
+            senior frontend engineer at <a href="https://sigma.computing" className="underline">sigma.computing</a>
           </motion.p>
           
-          <motion.div 
-            className="flex space-x-4"
-            variants={itemVariants}
+          <motion.p 
+            className="text-lg md:text-xl text-gray-700"
           >
-            <a 
-              href="#work" 
-              className="px-7 py-3 bg-primary text-white font-medium rounded-sm hover:bg-opacity-90 transition-all"
-              onClick={(e) => { e.preventDefault(); scrollToSection("#work"); }}
-            >
-              View Work
-            </a>
-            <a 
-              href="#contact" 
-              className="px-7 py-3 border border-primary text-primary font-medium rounded-sm hover:bg-primary hover:text-white transition-all"
-              onClick={(e) => { e.preventDefault(); scrollToSection("#contact"); }}
-            >
-              Contact Me
-            </a>
-          </motion.div>
+            based in nyc
+          </motion.p>
         </motion.div>
       </div>
+      
+      {/* Visual indicator to scroll down */}
+      <motion.div 
+        className="absolute bottom-12"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5, duration: 0.5 }}
+      >
+        <a 
+          href="#about" 
+          className="flex flex-col items-center text-gray-400 hover:text-black transition-colors"
+          onClick={(e) => { e.preventDefault(); scrollToSection("#about"); }}
+        >
+          <span className="text-sm mb-2">Scroll</span>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 5V19M12 19L5 12M12 19L19 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </a>
+      </motion.div>
     </section>
   );
 }

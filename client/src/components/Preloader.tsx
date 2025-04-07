@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface PreloaderProps {
   onLoadingComplete: () => void;
@@ -17,13 +17,15 @@ export default function Preloader({ onLoadingComplete }: PreloaderProps) {
           clearInterval(interval);
           setTimeout(() => {
             setIsComplete(true);
-            onLoadingComplete();
+            setTimeout(() => {
+              onLoadingComplete();
+            }, 500);
           }, 500);
           return 100;
         }
-        return prev + Math.floor(Math.random() * 10) + 1;
+        return prev + 1;
       });
-    }, 200);
+    }, 20);
 
     return () => clearInterval(interval);
   }, [onLoadingComplete]);
@@ -32,24 +34,15 @@ export default function Preloader({ onLoadingComplete }: PreloaderProps) {
     <AnimatePresence>
       {!isComplete && (
         <motion.div
-          className="fixed inset-0 bg-black z-50 flex justify-end items-end"
-          initial={{ opacity: 1 }}
+          className="fixed inset-0 bg-black z-50 flex items-end justify-end"
           exit={{ 
             opacity: 0,
-            transition: { duration: 0.8, ease: "easeInOut" }
+            transition: { duration: 0.5 }
           }}
         >
-          <motion.div 
-            className="p-8 md:p-12"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
-          >
-            <h2 className="text-5xl md:text-7xl font-bold text-white">
-              {Math.min(progress, 100)}
-              <span className="text-3xl md:text-5xl">%</span>
-            </h2>
-          </motion.div>
+          <div className="p-6 text-white font-mono text-lg">
+            {progress}%
+          </div>
         </motion.div>
       )}
     </AnimatePresence>
