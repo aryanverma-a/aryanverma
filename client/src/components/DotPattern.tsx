@@ -8,7 +8,7 @@ export default function DotPattern() {
   
   // Transform the dots scale based on scroll position
   // Increase zoom factor dramatically to get to white space between dots
-  const scale = useTransform(scrollY, [0, 300], [1, 25]); 
+  const scale = useTransform(scrollY, [0, 250], [1, 35]); 
   // No opacity fade - we'll just zoom in until dots spread out
   
   // Generate dots pattern
