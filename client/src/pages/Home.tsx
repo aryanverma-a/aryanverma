@@ -16,7 +16,8 @@ export default function Home() {
   
   // Transform content opacity based on scroll position
   // Delay the content reveal until dots are sufficiently zoomed out
-  const contentOpacity = useTransform(scrollY, [0, 350, 400], [0, 0, 1]);
+  // With higher zoom factor, we need to adjust these values
+  const contentOpacity = useTransform(scrollY, [0, 300, 350], [0, 0, 1]);
   
   // This will setup the observer once and handle cleanup
   useIntersectionObserver(setActiveSection);
@@ -71,12 +72,15 @@ export default function Home() {
             {/* Hero section - always visible */}
             <HeroSection />
             
-            {/* Content that appears after scroll, with white background */}
-            <div className="mt-[100vh] bg-white"> {/* Push content down below fold */}
-              <AboutSection />
-              <WorkSection />
-              <ContactSection />
-              <Footer />
+            {/* Content sections fade in with white background */}
+            <div className="bg-white min-h-screen mt-[100vh]">
+              {/* Content sections that fade in as you scroll */}
+              <div className="pt-20">
+                <AboutSection />
+                <WorkSection />
+                <ContactSection />
+                <Footer />
+              </div>
             </div>
           </main>
         </motion.div>
