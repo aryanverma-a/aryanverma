@@ -52,7 +52,7 @@ export default function Header({ activeSection }: HeaderProps) {
     <header className={`fixed w-full bg-background/90 backdrop-blur-sm z-10 transition-all duration-300 ${isScrolled ? "border-b border-gray-200/40" : ""}`}>
       <div className="container mx-auto px-6 py-5 flex justify-between items-center">
         <a href="#home" className="text-xl font-bold relative" onClick={(e) => { e.preventDefault(); scrollToSection("#home"); }}>
-          <span className="text-primary">John.Doe</span>
+          <span className="text-primary">Aryan.Verma</span>
           <CursorBlink />
         </a>
         

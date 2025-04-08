@@ -61,7 +61,7 @@ export default function CreativeLayout({ children, showNameCorners = true }: Cre
           transition={{ delay: 0.2, duration: 0.5 }}
           style={{ opacity: nameOpacity }}
         >
-          matt
+          aryan
         </motion.div>
       )}
       
@@ -74,7 +74,7 @@ export default function CreativeLayout({ children, showNameCorners = true }: Cre
           transition={{ delay: 0.2, duration: 0.5 }}
           style={{ opacity: nameOpacity }}
         >
-          bierman
+          verma
         </motion.div>
       )}
       

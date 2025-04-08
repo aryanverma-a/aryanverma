@@ -31,7 +31,7 @@ export default function Footer() {
               className="text-xl font-bold relative"
               onClick={(e) => { e.preventDefault(); scrollToSection("#home"); }}
             >
-              <span className="text-black">John.Doe</span>
+              <span className="text-black">Aryan.Verma</span>
               <CursorBlink />
             </a>
           </div>
@@ -53,7 +53,7 @@ export default function Footer() {
           </nav>
           
           <div className="text-xs text-gray-600">
-            &copy; {currentYear} John Doe. All rights reserved.
+            &copy; {currentYear} Aryan Verma. All rights reserved.
           </div>
         </div>
       </div>

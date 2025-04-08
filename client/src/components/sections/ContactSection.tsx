@@ -129,8 +129,8 @@ export default function ContactSection() {
                   <div className="text-black w-6 text-center">
                     <i className="fas fa-envelope"></i>
                   </div>
-                  <a href="mailto:hello@johndoe.com" className="text-gray-900 hover:text-black transition-colors">
-                    hello@johndoe.com
+                  <a href="mailto:hello@aryanverma.com" className="text-gray-900 hover:text-black transition-colors">
+                    hello@aryanverma.com
                   </a>
                 </div>
                 
