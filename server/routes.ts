@@ -1,6 +1,8 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
+import express from "express";
+import path from "path";
 
 interface ContactFormData {
   name: string;
@@ -9,6 +11,8 @@ interface ContactFormData {
 }
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Serve the attached_assets directory statically
+  app.use('/attached_assets', express.static(path.join(process.cwd(), 'attached_assets')));
   // Contact form submission endpoint
   app.post("/api/contact", async (req, res) => {
     try {

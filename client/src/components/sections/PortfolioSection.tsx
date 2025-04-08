@@ -36,12 +36,12 @@ export default function PortfolioSection() {
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
             >
-              {/* Display the actual photo */}
-              <div className="aspect-square w-full overflow-hidden">
+              {/* Display the actual photo with natural aspect ratio */}
+              <div className="w-full overflow-hidden">
                 <img 
                   src={item.imagePath} 
                   alt={`Portfolio item ${item.id}`}
-                  className="w-full h-full object-cover"
+                  className="w-full h-auto"
                 />
               </div>
             </motion.div>
