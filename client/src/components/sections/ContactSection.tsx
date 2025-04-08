@@ -111,11 +111,11 @@ export default function ContactSection() {
           variants={containerVariants}
         >
           <motion.h2 
-            className="text-3xl font-bold mb-12 relative"
+            className="text-3xl font-bold mb-12 relative text-center mx-auto"
             variants={itemVariants}
           >
-            Get in Touch
-            <span className="absolute bottom-0 left-0 w-20 h-1 bg-black mt-2"></span>
+            get in Touch.
+            <span className="absolute bottom-0 left-0 right-0 mx-auto w-20 h-1 bg-black mt-2"></span>
           </motion.h2>
           
           <div className="grid md:grid-cols-2 gap-10">

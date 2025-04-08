@@ -44,11 +44,11 @@ export default function AboutSection() {
           variants={containerVariants}
         >
           <motion.h2 
-            className="text-3xl font-bold mb-12 relative"
+            className="text-3xl font-bold mb-12 relative text-center mx-auto"
             variants={itemVariants}
           >
-            About Me
-            <span className="absolute bottom-0 left-0 w-20 h-1 bg-black mt-2"></span>
+            about me
+            <span className="absolute bottom-0 left-0 right-0 mx-auto w-20 h-1 bg-black mt-2"></span>
           </motion.h2>
           
           <div className="space-y-6 text-lg">
