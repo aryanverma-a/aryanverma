@@ -4,14 +4,12 @@ import { useLocation } from 'wouter';
 
 export default function AsciiArt() {
   const [location] = useLocation();
-  const { scrollY } = useScroll();
+  const asciiContainerRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(true);
+  const { scrollY } = useScroll();
   
-  // Only show on homepage and hide when scrolling
-  const asciiOpacity = useTransform(scrollY, [0, 100, 150], [1, 0.5, 0]);
-  
-  // Calculate zoom scale based on scroll position (zoom in when scrolling)
-  // Match the timing of the page zoom effect (0-250px scroll range)
+  // Simple transformations to match page zoom effect
+  const opacity = useTransform(scrollY, [0, 150], [1, 0]);
   const zoomScale = useTransform(scrollY, [0, 250], [1, 150]);
   
   // Only show on homepage
@@ -21,7 +19,6 @@ export default function AsciiArt() {
   
   // Hide component entirely if not on homepage
   if (!isVisible) return null;
-  const asciiContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!asciiContainerRef.current) return;
@@ -144,7 +141,7 @@ export default function AsciiArt() {
     <motion.div 
       className="fixed inset-0 flex items-center justify-center pointer-events-none"
       style={{ 
-        opacity: asciiOpacity, // Fade out when scrolling
+        opacity: opacity, // Fade out when scrolling
         position: 'fixed',
         top: 0,
         left: 0,
