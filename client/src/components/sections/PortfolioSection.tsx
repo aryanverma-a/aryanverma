@@ -39,15 +39,10 @@ export default function PortfolioSection() {
             >
               {/* Placeholder for photo - this will be a plain box until actual photos are added */}
               <div 
-                className="aspect-square w-full mb-4 bg-neutral-100 flex items-center justify-center"
+                className="aspect-square w-full bg-neutral-100 flex items-center justify-center"
               >
                 <p className="text-neutral-400">Photo {item.id}</p>
               </div>
-              
-              <h3 className="text-xl font-medium">{item.title}</h3>
-              {item.category && (
-                <p className="text-neutral-600">{item.category}</p>
-              )}
             </motion.div>
           ))}
         </div>
