@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import HeroSection from "@/components/sections/HeroSection";
 import PortfolioSection from "@/components/sections/PortfolioSection";
 import AboutSection from "@/components/sections/AboutSection";
-import WorkSection from "@/components/sections/WorkSection";
+
 import ContactSection from "@/components/sections/ContactSection";
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 
@@ -27,7 +27,6 @@ export default function Home() {
       <div className="bg-white pt-20 pb-20">
         <PortfolioSection />
         <AboutSection />
-        <WorkSection />
         <ContactSection />
         <Footer />
       </div>

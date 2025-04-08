@@ -32,7 +32,6 @@ export default function Header({ activeSection }: HeaderProps) {
   const navLinks = [
     { href: "#home", label: "Home" },
     { href: "#about", label: "About" },
-    { href: "#work", label: "Work" },
     { href: "#contact", label: "Contact" },
   ];
 
