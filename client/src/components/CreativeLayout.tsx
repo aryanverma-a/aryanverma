@@ -45,7 +45,6 @@ export default function CreativeLayout({ children, showNameCorners = true }: Cre
         transition={{ delay: 0.2, duration: 0.5 }}
         style={{ 
           opacity: nameOpacity,
-          border: '1px solid #000',
           fontWeight: 'normal',
           fontSize: '14px',
         }}
