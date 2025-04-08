@@ -143,16 +143,16 @@ export default function ContactSection() {
               </div>
               
               <div className="flex space-x-5">
-                <a href="#" className="text-gray-700 hover:text-black transition-colors" aria-label="GitHub">
+                <a href="https://github.com/aryanverma-a" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-black transition-colors" aria-label="GitHub">
                   <i className="fab fa-github text-xl"></i>
                 </a>
-                <a href="#" className="text-gray-700 hover:text-black transition-colors" aria-label="LinkedIn">
+                <a href="https://www.linkedin.com/in/aryan-verma-867933279?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-black transition-colors" aria-label="LinkedIn">
                   <i className="fab fa-linkedin-in text-xl"></i>
                 </a>
-                <a href="#" className="text-gray-700 hover:text-black transition-colors" aria-label="Instagram">
+                <a href="https://www.instagram.com/aryanverma_._?igsh=OGQ5ZDc2ODk2ZA%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-black transition-colors" aria-label="Instagram">
                   <i className="fab fa-instagram text-xl"></i>
                 </a>
-                <a href="#" className="text-gray-700 hover:text-black transition-colors" aria-label="Snapchat">
+                <a href="https://t.snapchat.com/gNduWSjE" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-black transition-colors" aria-label="Snapchat">
                   <i className="fab fa-snapchat-ghost text-xl"></i>
                 </a>
               </div>
