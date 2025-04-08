@@ -129,8 +129,8 @@ export default function ContactSection() {
                   <div className="text-black w-6 text-center">
                     <i className="fas fa-envelope"></i>
                   </div>
-                  <a href="mailto:hello@aryanverma.com" className="text-gray-900 hover:text-black transition-colors">
-                    hello@aryanverma.com
+                  <a href="mailto:aryanverma9704@gmail.com" className="text-gray-900 hover:text-black transition-colors">
+                    aryanverma9704@gmail.com
                   </a>
                 </div>
                 
@@ -138,7 +138,7 @@ export default function ContactSection() {
                   <div className="text-black w-6 text-center">
                     <i className="fas fa-map-marker-alt"></i>
                   </div>
-                  <span className="text-gray-700">San Francisco, CA</span>
+                  <span className="text-gray-700">India</span>
                 </div>
               </div>
               
@@ -149,11 +149,11 @@ export default function ContactSection() {
                 <a href="#" className="text-gray-700 hover:text-black transition-colors" aria-label="LinkedIn">
                   <i className="fab fa-linkedin-in text-xl"></i>
                 </a>
-                <a href="#" className="text-gray-700 hover:text-black transition-colors" aria-label="Twitter">
-                  <i className="fab fa-twitter text-xl"></i>
+                <a href="#" className="text-gray-700 hover:text-black transition-colors" aria-label="Instagram">
+                  <i className="fab fa-instagram text-xl"></i>
                 </a>
-                <a href="#" className="text-gray-700 hover:text-black transition-colors" aria-label="Dribbble">
-                  <i className="fab fa-dribbble text-xl"></i>
+                <a href="#" className="text-gray-700 hover:text-black transition-colors" aria-label="Snapchat">
+                  <i className="fab fa-snapchat-ghost text-xl"></i>
                 </a>
               </div>
             </motion.div>
