@@ -37,6 +37,22 @@ export default function CreativeLayout({ children, showNameCorners = true }: Cre
 
   return (
     <div className="bg-background text-text font-sans leading-relaxed overflow-hidden">
+      {/* Student box in top right corner */}
+      <motion.div 
+        className="fixed top-0 right-0 z-30 m-6 md:m-8 bg-white text-black px-4 py-2"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isReady ? 1 : 0 }}
+        transition={{ delay: 0.2, duration: 0.5 }}
+        style={{ 
+          opacity: nameOpacity,
+          border: '1px solid #000',
+          fontWeight: 'normal',
+          fontSize: '14px',
+        }}
+      >
+        student.
+      </motion.div>
+      
       {/* First name in top left corner - only if showNameCorners is true */}
       {showNameCorners && (
         <motion.div 
