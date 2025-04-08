@@ -4,19 +4,18 @@ import { motion } from 'framer-motion';
 // Define a simple interface for portfolio items
 interface PortfolioItem {
   id: number;
-  title: string;
-  category?: string;
+  imagePath: string;
 }
 
 export default function PortfolioSection() {
-  // Sample portfolio items (placeholders for now)
+  // Portfolio items with actual image paths
   const [portfolioItems] = useState<PortfolioItem[]>([
-    { id: 1, title: 'Project 1', category: 'Design' },
-    { id: 2, title: 'Project 2', category: 'Development' },
-    { id: 3, title: 'Project 3', category: 'Photography' },
-    { id: 4, title: 'Project 4', category: 'Design' },
-    { id: 5, title: 'Project 5', category: 'Development' },
-    { id: 6, title: 'Project 6', category: 'Photography' },
+    { id: 1, imagePath: '/attached_assets/1.jpeg' },
+    { id: 2, imagePath: '/attached_assets/3.jpeg' },
+    { id: 3, imagePath: '/attached_assets/5.jpeg' },
+    { id: 4, imagePath: '/attached_assets/6.jpeg' },
+    { id: 5, imagePath: '/attached_assets/10.jpeg' },
+    { id: 6, imagePath: '/attached_assets/14.JPG' },
   ]);
 
   return (
@@ -37,11 +36,13 @@ export default function PortfolioSection() {
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
             >
-              {/* Placeholder for photo - this will be a plain box until actual photos are added */}
-              <div 
-                className="aspect-square w-full bg-neutral-100 flex items-center justify-center"
-              >
-                <p className="text-neutral-400">Photo {item.id}</p>
+              {/* Display the actual photo */}
+              <div className="aspect-square w-full overflow-hidden">
+                <img 
+                  src={item.imagePath} 
+                  alt={`Portfolio item ${item.id}`}
+                  className="w-full h-full object-cover"
+                />
               </div>
             </motion.div>
           ))}
