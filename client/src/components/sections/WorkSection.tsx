@@ -87,15 +87,6 @@ export default function WorkSection() {
               />
             ))}
           </div>
-          
-          <motion.div 
-            className="mt-12 text-center"
-            variants={headerVariants}
-          >
-            <a href="#" className="inline-flex items-center justify-center px-7 py-3 border border-black text-black font-medium rounded-sm hover:bg-black hover:text-white transition-all">
-              View All Projects <i className="fas fa-arrow-right ml-2 text-sm"></i>
-            </a>
-          </motion.div>
         </motion.div>
       </div>
     </section>
