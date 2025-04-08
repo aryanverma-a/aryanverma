@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/sections/HeroSection";
+import PortfolioSection from "@/components/sections/PortfolioSection";
 import AboutSection from "@/components/sections/AboutSection";
 import WorkSection from "@/components/sections/WorkSection";
 import ContactSection from "@/components/sections/ContactSection";
@@ -24,6 +25,7 @@ export default function Home() {
       
       {/* Other sections with white background - stacked vertically for normal scrolling */}
       <div className="bg-white pt-20 pb-20">
+        <PortfolioSection />
         <AboutSection />
         <WorkSection />
         <ContactSection />
