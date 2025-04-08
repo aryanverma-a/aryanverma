@@ -2,13 +2,15 @@ import { motion } from "framer-motion";
 
 export default function AboutSection() {
   const skills = [
-    "JavaScript",
-    "React",
-    "Vue.js",
+    "Python",
+    "Java",
+    "C/C++",
     "HTML/CSS",
-    "Tailwind CSS",
-    "TypeScript",
-    "UI/UX Design",
+    "JavaScript",
+    "ReactJS",
+    "Photography",
+    "Problem Solving",
+    "DSA",
   ];
 
   const containerVariants = {
@@ -56,17 +58,29 @@ export default function AboutSection() {
               className="leading-relaxed"
               variants={itemVariants}
             >
-              I'm a frontend developer with a passion for creating elegant, functional interfaces. 
-              With over 5 years of experience, I specialize in building responsive web applications
-              that blend aesthetics with usability.
+              Greetings! I am Aryan Verma, an 19-year-old student on a transformative academic journey. 
+              My scholastic voyage commenced at Don Bosco Academy, Patna, where I successfully completed my 10th grade. 
+              Subsequently, I pursued my higher secondary education at St. Michael's High School, Patna, 
+              culminating in the successful completion of my 12th grade. Presently, I find myself immersed in the 
+              dynamic realm of Computer Science and Engineering as I pursue my undergraduate degree at Vellore 
+              Institute of Technology, Vellore.
             </motion.p>
             
             <motion.p 
               className="leading-relaxed"
               variants={itemVariants}
             >
-              My approach emphasizes clean code, modern frameworks, and thoughtful user experiences.
-              I believe in minimalism, where every element serves a purpose.
+              I'm a versatile person who likes to keep things balanced and enjoys a good laugh. I handle my studies, 
+              work, and downtime without going to extremes. I'm a tech enthusiast, loving to dive into the world 
+              of computers and coding, especially when I need a break. Outside of the digital realm, I find happiness 
+              in exploring new places, cafe hopping, going on hikes, and soaking in the sights.
+            </motion.p>
+            
+            <motion.p 
+              className="leading-relaxed"
+              variants={itemVariants}
+            >
+              In a nutshell, I'm just someone who enjoys a mix of everything and finds happiness in the little things in life.
             </motion.p>
             
             <motion.div 
